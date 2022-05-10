@@ -10,8 +10,11 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700&family=Noto+Sans+KR:wght@100;400;500;700&display=swap"
@@ -118,6 +121,115 @@
             </section>
         </div>
     </div>
+
+    <!-- 리스트 상세 모달 -->
+    <div class="modal" id="modal-post">
+        <div class="modal-background" onclick='$("#modal-post").removeClass("is-active")'></div>
+        <div class="modal-content">
+            <div class="box">
+                <div class="post_view">
+                    <div class="post_area">
+                        <div class="card">
+                            <img src="https://youimg1.tripcdn.com/target/10040d0000006tj6eB5B8_C_760_506.jpg"
+                                 class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">관악산 <span class="route">사당 능선 코스</span></h5>
+                                <div class="post_info">
+                                    <dl>
+                                        <dt>위치</dt>
+                                        <dd>서울시 관악구</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>편의시설</dt>
+                                        <dd>
+                                            <span class="badge badge-pill badge-primary">비교적 깨끗한 화장실</span>
+                                            <span class="badge badge-pill badge-secondary">대피소</span>
+                                            <span class="badge badge-pill badge-success">대중교통</span>
+                                            <span class="badge badge-pill badge-danger">주차장</span>
+                                            <span class="badge badge-pill badge-warning">하산 후 먹거리</span>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>소감 및 기타 정보</dt>
+                                        <dd>관악산은 사람이 너무 많아서 9시 이후에 올라가면 연주대에 정상석 대기줄이 엄청 길어요. 빨리 올라가는걸 추천합니다.</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"
+                onclick='$("#modal-post").removeClass("is-active")'></button>
+    </div>
+    <!-- //리스트 상세 모달 -->
+
+    <!-- 게시글 작성 모달 -->
+    <div class="modal" id="modal-post-write">
+        <div class="modal-background" onclick='$("#modal-post-write").removeClass("is-active")'></div>
+        <div class="modal-content">
+            <div class="box">
+                <div class="form_area">
+                    <form>
+                        <div class="form-group">
+                            <p class="form_ttl">사진 등록</p>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">업로드할 사진을 선택하세요.</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mountain" class="form_ttl">산 이름</label>
+                            <input type="text" class="form-control" id="mountain">
+                        </div>
+                        <div class="form-group">
+                            <label for="hikingRoute" class="form_ttl">등산 코스명</label>
+                            <input type="text" class="form-control" id="hikingRoute">
+                        </div>
+                        <div class="form-group">
+                            <label for="location" class="form_ttl">지역명</label>
+                            <input type="text" class="form-control" id="location">
+                        </div>
+                        <div class="form-group">
+                            <p class="form_ttl">편의시설</p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="fa1">
+                                <label class="form-check-label" for="fa1">비교적 깨끗한 화장실</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="fa2">
+                                <label class="form-check-label" for="fa2">대피소</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="fa3">
+                                <label class="form-check-label" for="fa3">대중교통</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="fa4">
+                                <label class="form-check-label" for="fa4">주차장</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="fa5">
+                                <label class="form-check-label" for="fa5">하산 후 먹거리</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="etc" class="form_ttl">소감 및 기타 정보</label>
+                            <textarea type="text" class="form-control" id="etc"></textarea>
+                        </div>
+                        <div class="btn_area taC">
+                            <button type="submit" class="btn btn-outline-secondary btn-lg">취소</button>
+                            <button type="submit" class="btn btn-secondary btn-lg">저장</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"
+                onclick='$("#modal-post-write").removeClass("is-active")'></button>
+    </div>
+    <!-- //게시글 모달 -->
 </div>
 </body>
 </html>
