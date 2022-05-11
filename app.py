@@ -10,9 +10,12 @@ import requests
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-app.config['UPLOAD_FOLDER'] = "./static"
+app.config['UPLOAD_FOLDER'] = "./static/img"
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+
+client = MongoClient('mongodb+srv://test:sparta@cluster0.zosuv.mongodb.net/Cluster0?retryWrites=true&w=majority')
+db = client.dbsparta
 
 SECRET_KEY = 'SPARTA'
 
@@ -71,9 +74,11 @@ def register():
             today = datetime.now()
             my_time = today.strftime('%Y%m%d%H%M%s')
             file_name = f'{filename}-{my_time}.{extension}'
-            file_path = f"./static/{file_name}.{extension}"
+            file_path = f"./static/img{file_name}.{extension}"
             file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], file_name))
             doc["pic"] = file_name
+        else:
+            doc["pic"] = ""
 
         db.mountain_info.insert_one(doc)
         # print(doc)
