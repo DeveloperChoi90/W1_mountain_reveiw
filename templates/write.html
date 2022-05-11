@@ -31,6 +31,42 @@
     <script>
         $(document).ready(function () {
         });
+
+        function get_user_info() {
+            let pic = $(`#customFile`)[0].files[0]
+            let mountain = $(`#mountain`).val()
+            let route = $(`#hikingRoute`).val()
+            let loca = $(`#location`).val()
+            let facilities = [0, 0, 0, 0, 0]
+            let description = $(`#etc`).val()
+            for(let i = 0; i < facilities.length; i++) {
+                if($(`#facility0${i+1}`).is(':checked')){
+                    facilities[i] = 1
+                }
+            }
+            let form_data = new FormData()
+            form_data.append("file_give", pic)
+            form_data.append("mountain_give", mountain)
+            form_data.append("route_give", route)
+            form_data.append("location_give", loca)
+            form_data.append("facilities_give", facilities)   // facilities 의 경우 리스트 FormData() 형식의 경우 value 가 다 문자열로 저장된다.
+            form_data.append("description_give", description)
+
+            $.ajax({
+                type: "POST",
+                url: "/register/save",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        alert(response["msg"])
+                        window.location.href = "/"
+                    }
+                }
+            });
+        }
     </script>
 </head>
 <body>
@@ -68,11 +104,12 @@
                             <label for="location" class="form_ttl">지역명</label>
                             <input type="text" class="form-control" id="location">
                         </div>
+
                         <div class="form-group">
                             <p class="form_ttl">편의시설</p>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="facility01">
-                                <label class="form-check-label" for="facility01">화장실</label>
+                                <label class="form-check-label" for="facility01">비교적 깨끗한 화장실</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="facility02">
@@ -80,17 +117,24 @@
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="facility03">
-                                <label class="form-check-label" for="facility03">뭐로 하지..?</label>
+                                <label class="form-check-label" for="facility03">이용 가능한 대중교통</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="facility04">
-                                <label class="form-check-label" for="facility04">편의시설4</label>
+                                <label class="form-check-label" for="facility04">넓은 주차장</label>
                             </div>
-
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="facility05">
+                                <label class="form-check-label" for="facility05">하산 후 먹거리</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="etc" class="form_ttl">소감 및 기타 정보</label>
+                            <textarea type="text" class="form-control" id="etc"></textarea>
                         </div>
                         <div class="btn_area taC">
-                            <button type="submit" class="btn btn-outline-secondary btn-lg">취소</button>
-                            <button type="submit" class="btn btn-secondary btn-lg">저장</button>
+                            <button type="button" class="btn btn-outline-secondary btn-lg" onclick='window.location.href = "/"'>취소</button>
+                            <button type="button" class="btn btn-secondary btn-lg" onclick='get_user_info()'>저장</button>
                         </div>
                     </form>
                 </div>
