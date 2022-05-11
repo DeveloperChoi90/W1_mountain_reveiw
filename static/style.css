@@ -17,7 +17,6 @@ body {
 }
 .banner_area p{
     font-weight: 400;
-    font-size: 1.2rem;
 }
 .banner_area .jumbotron{
     background-color: transparent;
@@ -88,18 +87,6 @@ body {
 .custom-file-input:lang(en)~.custom-file-label::after{
     content: '사진 업로드';
 }
-.card-title{
-    font-size: 24px;
-    font-weight: 700;
-}
-.card-title .route{
-    display: inline-block;
-    font-size: 16px;
-    opacity: .8;
-    vertical-align: middle;
-    margin-bottom: 3px;
-    margin-left: 6px;
-}
 
 
 
@@ -126,12 +113,12 @@ section{
 }
 .form_ttl{
     display: block;
-    font-size: 20px;
+    font-size: 26px;
     font-weight: 500;
     color: #333;
-    padding-bottom: 3px;
+    padding-bottom: 5px;
     border-bottom: 1px solid #ccc;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
     letter-spacing: -0.03em;
 }
 .form-group+.form-group{
