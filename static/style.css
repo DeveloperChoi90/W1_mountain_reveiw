@@ -5,9 +5,9 @@ body {
 }
 .banner_area{
     padding: 100px 0;
-    background: linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)), url(https://minio.nculture.org/amsweb-opt/multimedia_assets/244/85174/84669/c/003_%ED%95%9C%EB%9D%BC%EC%82%B0_%EC%98%81%EC%8B%A4%ED%83%90%EB%B0%A9%EB%A1%9C-%EA%B0%80%EC%9D%84-%EB%8B%A8%ED%92%8D_%ED%95%9C%EB%9D%BC%EC%82%B0%EA%B5%AD%EB%A6%BD%EA%B3%B5%EC%9B%90_%EC%A0%9C4%EC%9C%A0%ED%98%95-full-size.jpg);
+    background: linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.6)), url(https://minio.nculture.org/amsweb-opt/multimedia_assets/244/85174/84669/c/003_%ED%95%9C%EB%9D%BC%EC%82%B0_%EC%98%81%EC%8B%A4%ED%83%90%EB%B0%A9%EB%A1%9C-%EA%B0%80%EC%9D%84-%EB%8B%A8%ED%92%8D_%ED%95%9C%EB%9D%BC%EC%82%B0%EA%B5%AD%EB%A6%BD%EA%B3%B5%EC%9B%90_%EC%A0%9C4%EC%9C%A0%ED%98%95-full-size.jpg);
     background-size: cover;
-    background-position: center;
+    background-position: center top 37%;
     background-repeat: no-repeat;
     color: #fff;
     text-align: center;
@@ -49,17 +49,31 @@ body {
     transform: translate3d(-50%, -50%, 0);
     object-fit: cover;
 }
-.row .txt_box{
-    padding: 20px 10px;
+.hover_area{
+    display: flex;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.5);
     text-align: center;
-    border: 1px solid #ddd;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: ease-out 200ms;
 }
-.row .txt_box p{
+.row .img_box:hover .hover_area{
+    opacity: 1;
+}
+.hover_area .txt_box p{
     margin: 0;
-    font-size: 20px;
+    font-size: 24px;
     text-decoration: none!important;
-    color: #333;
+    color: #fff;
     font-style: normal;
+    font-weight: 700;
 }
 .col-4:nth-child(n+4){
     margin-top: 50px;
@@ -176,6 +190,16 @@ textarea{
 .post_info dd{
     font-size: 14px;
 }
+.post_info .badge-pill+.badge-pill{
+    margin-left: 5px;
+}
+.row .img_box .labels{
+    max-width: 80%;
+    margin: 14px auto 0;
+}
+.badge-pill{
+    letter-spacing: -0.03em;
+}
 
 /* modal */
 .section {
@@ -216,4 +240,7 @@ input::-webkit-calendar-picker-indicator {
 }
 a.btn:not([href]):not([tabindex]){
     color: #fff;
+}
+.modal-content .modal-close{
+    right: -50px;
 }
