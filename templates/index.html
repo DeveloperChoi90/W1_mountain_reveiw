@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="나혼자 산탄다"/>
+    <meta property="og:description" content="혼자 산 타려니 막막한 혼산러, 등린이들 모여라! 등산 경험을 공유하고 유익한 정보도 얻어보세요!"/>
+    <meta property="og:image" content="{{ url_for('static', filename='og_img.png') }}"/>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700&family=Noto+Sans+KR:wght@100;400;500;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <!--<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>나혼자 산탄다</title>
+    <script>
+        $(document).ready(function () {
+        });
+    </script>
+</head>
+<body>
+<div class="wrap">
+    <div class="banner_area">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">나혼자 산탄다!</h1>
+                <p class="lead">혼자 산 타려니 막막한 혼산러, 등린이들 모여라! 등산 경험을 공유하고 유익한 정보도 얻어보세요!</p>
+            </div>
+        </div>
+    </div>
+    <div class="contents">
+        <div class="container">
+            <section>
+                <div class="search_area">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="산 이름을 입력하세요.">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary btn-lg" type="button" id="">검색</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn_area taR">
+                    <button type="button" class="btn btn-secondary btn-lg" onclick='window.location.href = "/register"'>등록하기</button>  {# html파일을 연결하기 위해서 먼저 app.py에서 랜더링을 해야 하는건가? #}
+                </div>
+                <div class="pics_area">
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="https://youimg1.tripcdn.com/target/10040d0000006tj6eB5B8_C_760_506.jpg"
+                                         class="img-fluid" alt="...">
+                                </div>
+                                <div class="txt_box">
+                                    <p>관악산</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="https://youimg1.tripcdn.com/target/10040d0000006tj6eB5B8_C_760_506.jpg"
+                                         class="img-fluid" alt="...">
+                                </div>
+                                <div class="txt_box">
+                                    <p>관악산</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="https://youimg1.tripcdn.com/target/10040d0000006tj6eB5B8_C_760_506.jpg"
+                                         class="img-fluid" alt="...">
+                                </div>
+                                <div class="txt_box">
+                                    <p>관악산</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="https://youimg1.tripcdn.com/target/10040d0000006tj6eB5B8_C_760_506.jpg"
+                                         class="img-fluid" alt="...">
+                                </div>
+                                <div class="txt_box">
+                                    <p>관악산</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="https://youimg1.tripcdn.com/target/10040d0000006tj6eB5B8_C_760_506.jpg"
+                                         class="img-fluid" alt="...">
+                                </div>
+                                <div class="txt_box">
+                                    <p>관악산</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+</html>
