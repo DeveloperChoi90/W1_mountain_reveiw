@@ -33,6 +33,29 @@
     <script>
         $(document).ready(function () {
         });
+
+
+
+        function getPost(num){
+            //로그인 안되었을 경우에 대한 조건
+            /*
+            if(!true){
+                alert('로그인을 해주세요.')
+                window.location.href = '/login';
+                return;
+            }*/
+            //로그인 되었을 경우
+            window.location.href=`/view?post_num=${num}`;
+            $.ajax({
+                type: 'GET',
+                url: '/view',
+                data: {},
+                success: function(response){
+                    alert('????')
+                    document.getElementById('modal-post').classList.add('is-active');
+                }
+            })
+        }
     </script>
 </head>
 <body>
@@ -61,61 +84,26 @@
                 </div>
                 <div class="pics_area">
                     <div class="row">
-                        <div class="col-4">
-                            <a href="#">
+                        {% for post in posts %}
+                        <div class="col-4" id="post_{{ post.count }}">
+                            <a href="javascript:;" onclick="getPost({{ post.count }})">
                                 <div class="img_box">
-                                    <img src="https://youimg1.tripcdn.com/target/10040d0000006tj6eB5B8_C_760_506.jpg"
-                                         class="img-fluid" alt="...">
+                                    <img src="{{ post.pic }}"
+                                         class="img-fluid" alt="{{ post.mountain }}">
+                                    <ul class="labels">
+                                        {% for label in post.fa %}
+                                            {% if label == 1 %}
+                                            <li>{{ label }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
                                 </div>
                                 <div class="txt_box">
-                                    <p>관악산</p>
+                                    <p>{{ post.mountain }}</p>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-4">
-                            <a href="#">
-                                <div class="img_box">
-                                    <img src="https://youimg1.tripcdn.com/target/10040d0000006tj6eB5B8_C_760_506.jpg"
-                                         class="img-fluid" alt="...">
-                                </div>
-                                <div class="txt_box">
-                                    <p>관악산</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-4">
-                            <a href="#">
-                                <div class="img_box">
-                                    <img src="https://youimg1.tripcdn.com/target/10040d0000006tj6eB5B8_C_760_506.jpg"
-                                         class="img-fluid" alt="...">
-                                </div>
-                                <div class="txt_box">
-                                    <p>관악산</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-4">
-                            <a href="#">
-                                <div class="img_box">
-                                    <img src="https://youimg1.tripcdn.com/target/10040d0000006tj6eB5B8_C_760_506.jpg"
-                                         class="img-fluid" alt="...">
-                                </div>
-                                <div class="txt_box">
-                                    <p>관악산</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-4">
-                            <a href="#">
-                                <div class="img_box">
-                                    <img src="https://youimg1.tripcdn.com/target/10040d0000006tj6eB5B8_C_760_506.jpg"
-                                         class="img-fluid" alt="...">
-                                </div>
-                                <div class="txt_box">
-                                    <p>관악산</p>
-                                </div>
-                            </a>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </section>
@@ -195,7 +183,7 @@
                             <p class="form_ttl">편의시설</p>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="fa1">
-                                <label class="form-check-label" for="fa1">비교적 깨끗한 화장실</label>
+                                <label class="form-check-label" for="fa1" data-class="class1">비교적 깨끗한 화장실</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="fa2">
