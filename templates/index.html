@@ -31,30 +31,55 @@
 
     <title>나혼자 산탄다</title>
     <script>
-        $(document).ready(function () {
-        });
-
-
-
-        function getPost(num){
-            //로그인 안되었을 경우에 대한 조건
-            /*
-            if(!true){
-                alert('로그인을 해주세요.')
-                window.location.href = '/login';
-                return;
-            }*/
-            //로그인 되었을 경우
-            window.location.href=`/view?post_num=${num}`;
-            $.ajax({
-                type: 'GET',
-                url: '/view',
-                data: {},
-                success: function(response){
-                    alert('????')
-                    document.getElementById('modal-post').classList.add('is-active');
+        function getPost(img) {
+            let posts = {{ posts|safe }};
+            let num = '';
+            // 클릭한 리스트의 pic 값과 같은 data의 인덱스 찾기
+            for (let i = 0; i < posts.length; i++) {
+                if (posts[i].pic === img) {
+                    num = i;
                 }
-            })
+            }
+            let post = posts[num]; // 클릭한 리스트에 해당하는 데이터
+            let modal = document.getElementById('modal-post');
+            // 모달 html 생성하고 데이터 넣기
+            let html_temp = `<div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">${post.mountain} <span class="route">${post.route}</span></h5>
+                                    <div class="post_info">
+                                        <dl>
+                                            <dt>위치</dt>
+                                            <dd>${post.location}</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>편의시설</dt>
+                                            <dd class="facilityArea"></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>소감 및 기타 정보</dt>
+                                            <dd>${post.desc}</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>`;
+            modal.querySelector('.post_area').innerHTML = html_temp; // 모달 안에 append
+            if(post.pic !== ''){
+                let img = document.createElement('img');
+                img.className = 'card-img-top';
+                img.setAttribute('alt', post.mountain);
+                img.setAttribute('src', '{{ url_for('static', filename='img/') }}' + post.pic);
+                modal.querySelector('.card').prepend(img);
+            }
+
+            for (var i = 0; i < post.fa.length; i++) { // 체크된 편의시설 불러와서 html 태그로 만들고 append
+                if (Number(Object.values(post.fa[i][0])) === 1) {
+                    let span = document.createElement('span');
+                    span.className = `badge badge-pill ${Object.values(post.fa[i][1]).join('')}`;
+                    span.innerText = Object.keys(post.fa[i][0]);
+                    modal.querySelector('.facilityArea').append(span);
+                }
+            }
+            modal.classList.add('is-active');
         }
     </script>
 </head>
@@ -80,31 +105,38 @@
                     </div>
                 </div>
                 <div class="btn_area taR">
-
                     <button type="button" class="btn btn-secondary btn-lg" onclick='window.location.href = "/register"'>등록하기</button>  {# html파일을 연결하기 위해서 먼저 app.py에서 랜더링을 해야 하는건가? #}
-
                 </div>
                 <div class="pics_area">
                     <div class="row">
                         {% for post in posts %}
-                        <div class="col-4" id="post_{{ post.count }}">
-                            <a href="javascript:;" onclick="getPost({{ post.count }})">
-                                <div class="img_box">
-                                    <img src="{{ post.pic }}"
-                                         class="img-fluid" alt="{{ post.mountain }}">
-                                    <ul class="labels">
-                                        {% for label in post.fa %}
-                                            {% if label == 1 %}
-                                            <li>{{ label }}</li>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                                <div class="txt_box">
-                                    <p>{{ post.mountain }}</p>
-                                </div>
-                            </a>
-                        </div>
+                            <div class="col-4">
+                                <a href="javascript:;" onclick="getPost('{{ post.pic }}')">
+                                    <div class="img_box">
+                                        {% if post.pic == '' %}
+                                            <img src="{{ url_for('static', filename='@thumb_default.png') }}"
+                                                 class="img-fluid" alt="{{ post.mountain }}">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/') }}{{ post.pic }}"
+                                                 class="img-fluid" alt="{{ post.mountain }}">
+                                        {% endif %}
+                                        <div class="hover_area">
+                                            <div class="txt_box">
+                                                <p>{{ post.mountain }}</p>
+                                            </div>
+                                            <ul class="labels">
+                                                {% for arr, class in post.fa %}
+                                                    {% for text, show in arr.items() %}
+                                                        {% if show %}
+                                                            <li class="badge badge-pill {{ class }}">{{ text }}</li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -119,6 +151,7 @@
             <div class="box">
                 <div class="post_view">
                     <div class="post_area">
+                        <!-- 리스트 클릭 시 데이터 불러오는 영역 -->
                         <div class="card">
                             <img src="https://youimg1.tripcdn.com/target/10040d0000006tj6eB5B8_C_760_506.jpg"
                                  class="card-img-top" alt="...">
@@ -146,6 +179,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- //리스트 클릭 시 데이터 불러오는 영역 -->
                     </div>
                 </div>
             </div>
@@ -159,6 +193,8 @@
     <div class="modal" id="modal-post-write">
         <div class="modal-background" onclick='$("#modal-post-write").removeClass("is-active")'></div>
         <div class="modal-content">
+            <button class="modal-close is-large" aria-label="close"
+                onclick='$("#modal-post-write").removeClass("is-active")'></button>
             <div class="box">
                 <div class="form_area">
                     <form>
@@ -216,8 +252,6 @@
                 </div>
             </div>
         </div>
-        <button class="modal-close is-large" aria-label="close"
-                onclick='$("#modal-post-write").removeClass("is-active")'></button>
     </div>
     <!-- //게시글 모달 -->
 </div>
