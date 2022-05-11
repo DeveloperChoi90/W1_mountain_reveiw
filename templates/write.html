@@ -30,17 +30,25 @@
     <title>나혼자 산탄다</title>
     <script>
         $(document).ready(function () {
-        });
+            let file = document.querySelector('#customFile');
+            let input_filename = document.querySelector('#customFile2');
+            console.log(input_filename)
+            file.addEventListener('change', function (e) {
+                input_filename.innerHTML = e.target.files[0].name;
+             })
+        })
+
 
         function get_user_info() {
             let pic = $(`#customFile`)[0].files[0]
+            console.log(pic)
             let mountain = $(`#mountain`).val()
             let route = $(`#hikingRoute`).val()
             let loca = $(`#location`).val()
             let facilities = [0, 0, 0, 0, 0]
             let description = $(`#etc`).val()
             for(let i = 0; i < facilities.length; i++) {
-                if($(`#facility0${i+1}`).is(':checked')){
+                if($(`#fa0${i+1}`).is(':checked')){
                     facilities[i] = 1
                 }
             }
@@ -66,6 +74,7 @@
                     }
                 }
             });
+
         }
     </script>
 </head>
@@ -88,7 +97,7 @@
                             <p class="form_ttl">사진 등록</p>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="customFile">
-                                <label class="custom-file-label" for="customFile">업로드할 사진을 선택하세요.</label>
+                                <label class="custom-file-label" for="customFile" id="customFile2">업로드할 사진을 선택하세요.</label>
                             </div>
                         </div>
                         <div class="form-group">
@@ -104,28 +113,29 @@
                             <label for="location" class="form_ttl">지역명</label>
                             <input type="text" class="form-control" id="location">
                         </div>
+{#화장실 badge-primary 대피소 badge-secondary 대중교통 badge-success 주차장 badge-danger 하산 후 먹거리 badge-warning#}
 
                         <div class="form-group">
                             <p class="form_ttl">편의시설</p>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="facility01">
-                                <label class="form-check-label" for="facility01">비교적 깨끗한 화장실</label>
+                                <input class="form-check-input" type="checkbox" id="fa01">
+                                <label label class="form-check-label" for="fa1" data-class="badge-primary">비교적 깨끗한 화장실</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="facility02">
-                                <label class="form-check-label" for="facility02">대피소</label>
+                                <input class="form-check-input" type="checkbox" id="fa02">
+                                <label class="form-check-label" for="fa02" data-class="badge-secondary">대피소</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="facility03">
-                                <label class="form-check-label" for="facility03">이용 가능한 대중교통</label>
+                                <input class="form-check-input" type="checkbox" id="fa03">
+                                <label class="form-check-label" for="fa03" data-class="badge-success">이용 가능한 대중교통</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="facility04">
-                                <label class="form-check-label" for="facility04">넓은 주차장</label>
+                                <input class="form-check-input" type="checkbox" id="fa04">
+                                <label class="form-check-label" for="fa04" data-class="badge-danger">넓은 주차장</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="facility05">
-                                <label class="form-check-label" for="facility05">하산 후 먹거리</label>
+                                <input class="form-check-input" type="checkbox" id="fa05">
+                                <label class="form-check-label" for="fa05" data-class="badge-warning">하산 후 먹거리</label>
                             </div>
                         </div>
                         <div class="form-group">
