@@ -17,6 +17,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 #mongoDB
 ##각자 DB 사용
+#유승연 작성
 
 
 SECRET_KEY = 'SPARTA'
