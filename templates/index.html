@@ -93,15 +93,7 @@
             window.location.href = "/login"
         }
 
-
-
-
-        let mountain_list = [];
         let searchVal = '';
-        for (let i = 0; i < posts.length; i++) {
-            mountain_list.push(posts[i]['mountain'])
-        }
-
         function search() {
             searchVal = document.getElementById('mountainName').value;
             if (searchVal.trim().length <= 0) {
@@ -111,15 +103,6 @@
             searched = true;
             window.location.href = `/?searched=yes&keyword=${searchVal}`;
         }
-
-
-
-
-
-
-
-
-
     </script>
 </head>
 <body>
@@ -157,8 +140,7 @@
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="산 이름을 입력하세요." id="mountainName">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary btn-lg" type="button" onclick="search()">검색
-                            </button>
+                            <button class="btn btn-outline-secondary btn-lg" type="button" onclick="search()">검색</button>
                         </div>
                     </div>
                 </div>
