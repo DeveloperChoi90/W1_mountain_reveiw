@@ -109,7 +109,7 @@
 <div class="wrap">
     <header id="header">
         <h1 class="logo">
-            <a href="/">나혼자<strong>산</strong>탄다</a>
+            <span href="/login/home">나혼자<strong>산</strong>탄다</span>
         </h1>
         <ul class="btns">
             <!-- 밑에는 사용자 아이디 불러올 수 있으면 추가.. -->
@@ -162,9 +162,11 @@
                         {# html파일을 연결하기 위해서 먼저 app.py에서 랜더링을 해야 하는건가? #}
                     </div>
                     <div class="pics_area">
+                        {% set count = [0] %}
                         <div class="row">
                             {% for post in posts|reverse %}
                                 {% if (status == 'no') or (status == 'yes' and keyword == post.mountain ) %}
+                                {% if count.append(count.pop() + 1) %}{% endif %}
                                 <div class="col-4">
                                     <a href="javascript:;" onclick="getPost('{{ post.pic }}')">
                                         <div class="img_box">
@@ -196,6 +198,9 @@
                                 {% endif %}
                             {% endfor %}
                         </div>
+                        {% if count == [0] and status == 'yes' %}
+                            <p class="no_result">'{{ keyword }}' 검색 결과가 없습니다.</p>
+                        {% endif %}
                     </div>
                 </div>
             </section>
@@ -249,6 +254,7 @@
     <!-- //리스트 상세 모달 -->
 
     <!-- 게시글 작성 모달 -->
+    <!--
     <div class="modal" id="modal-post-write">
         <div class="modal-background" onclick='$("#modal-post-write").removeClass("is-active")'></div>
         <div class="modal-content">
@@ -312,6 +318,7 @@
             </div>
         </div>
     </div>
+    -->
     <!-- //게시글 모달 -->
 </div>
 </body>

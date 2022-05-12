@@ -283,6 +283,11 @@ a.btn:not([href]):not([tabindex]){
 .wrap.register{
     padding-top: 0;
 }
+.no_result{
+    font-size: 16px;
+    text-align: center;
+    padding: 40px;
+}
 
 
 /* Header */
@@ -304,7 +309,7 @@ a.btn:not([href]):not([tabindex]){
 .logo{
     margin-bottom: 0;
 }
-.logo a{
+.logo span{
     display: block;
     font-size: 24px;
     font-weight: 500;
@@ -312,6 +317,9 @@ a.btn:not([href]):not([tabindex]){
     color: #fff;
     line-height: 1;
     font-weight: 400;
+}
+.logo strong{
+    color: #fff;
 }
 #header .btns{
     font-size: 0;
