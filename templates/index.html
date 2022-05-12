@@ -168,7 +168,7 @@
                                 {% if (status == 'no') or (status == 'yes' and keyword == post.mountain ) %}
                                 {% if count.append(count.pop() + 1) %}{% endif %}
                                 <div class="col-4">
-                                    <a href="javascript:;" onclick="getPost('{{ post.pic }}')">
+                                    <a href="javascript:" onclick="getPost('{{ post.pic }}')">
                                         <div class="img_box">
                                             {% if post.pic == '' %}
                                                 <img src="{{ url_for('static', filename='@thumb_default.png') }}"
