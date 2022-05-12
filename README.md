@@ -132,16 +132,6 @@ def check_dup():
     return jsonify({'result': 'success', 'exists': exists})
 ```
 
-*> 회원가입시 ID 중복확인*
-
-```python
-@app.route('/sign_up/check_dup', methods=['POST'])
-def check_dup():
-    # 아이디 중복확인
-    
-    return jsonify({'result': 'success', 'exists': exists})
-```
-
 
 ### 등록 페이지
 
