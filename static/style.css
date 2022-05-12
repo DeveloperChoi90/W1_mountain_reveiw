@@ -2,6 +2,7 @@ body {
     font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
     font-weight: normal;
     min-height: 100vh;
+    letter-spacing: -0.02em;
 }
 .banner_area{
     padding: 100px 0;
@@ -70,13 +71,33 @@ body {
 .row .img_box:hover .hover_area{
     opacity: 1;
 }
+.hover_area{
+    padding: 0 40px;
+}
 .hover_area .txt_box p{
     margin: 0;
-    font-size: 24px;
-    text-decoration: none!important;
     color: #fff;
     font-style: normal;
+}
+.hover_area .txt_box p.user{
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 8px;
+}
+.hover_area .txt_box p.user strong{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    margin-top: -4px;
+}
+.hover_area .txt_box p.mountain{
+    font-size: 24px;
     font-weight: 700;
+    line-height: 1;
+}
+.hover_area .labels{
+    margin-bottom: 0;
+    margin-top: 20px;
 }
 .col-4:nth-child(n+4){
     margin-top: 50px;
@@ -117,7 +138,33 @@ section.posts_area{
     margin-bottom: 3px;
     margin-left: 6px;
 }
-
+.card .user{
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    margin: 0;
+    padding: 0 5px;
+    border-radius: 4px;
+    background: #333;
+    color: #fff;
+    font-size: 14px;
+    line-height: 20px;
+}
+.card .user i{
+    display: inline-block;
+    margin-right: 4px;
+    margin-top: -2px;
+    font-weight: normal;
+    vertical-align: middle;
+    opacity: .5;
+}
+.card .facilityArea{
+    margin: -2px -4px;
+}
+.facilityArea .badge-pill{
+    margin: 2px 4px;
+}
 
 
 /* 공통 */
@@ -283,7 +330,8 @@ a.btn:not([href]):not([tabindex]){
 }
 
 /* container */
-#container{
+#container {
     position: relative;
     z-index: 1;
+}
   

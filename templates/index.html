@@ -25,19 +25,20 @@
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
 
     <title>나혼자 산탄다</title>
     <script>
+
         function sign_out() {
-    $.removeCookie('mytoken', {path: '/login/login'});
-    alert('로그아웃!')
-    window.location.href = "/"
+          $.removeCookie('mytoken', {path: '/login/login'});
+          alert('로그아웃!')
+          window.location.href = "/"
         }
+           
         function getPost(img) {
-            let posts = {{ posts|safe }};
             let num = '';
             // 클릭한 리스트의 pic 값과 같은 data의 인덱스 찾기
             for (let i = 0; i < posts.length; i++) {
@@ -49,6 +50,7 @@
             let modal = document.getElementById('modal-post');
             // 모달 html 생성하고 데이터 넣기
             let html_temp = `<div class="card">
+                                <p class="user"><i class="fa fa-solid fa-user"></i>${post.userID}</p>
                                 <div class="card-body">
                                     <h5 class="card-title">${post.mountain} <span class="route">${post.route}</span></h5>
                                     <div class="post_info">
@@ -68,7 +70,7 @@
                                 </div>
                             </div>`;
             modal.querySelector('.post_area').innerHTML = html_temp; // 모달 안에 append
-            if(post.pic !== ''){
+            if (post.pic !== '') {
                 let img = document.createElement('img');
                 img.className = 'card-img-top';
                 img.setAttribute('alt', post.mountain);
@@ -87,11 +89,18 @@
             modal.classList.add('is-active');
         }
 
+        let mountain_list = [];
+        for (let i = 0; i < posts.length; i++) {
+            mountain_list.push(posts[i]['mountain'])
+        }
+        function search(){
+
+        }
 
     </script>
 </head>
 <body>
-  <div class="wrap">
+<div class="wrap">
     <header id="header">
         <h1 class="logo">
             <a href="/">나혼자<strong>산</strong>탄다</a>
@@ -123,9 +132,9 @@
             <section class="search_area">
                 <div class="container">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="산 이름을 입력하세요.">
+                        <input type="text" class="form-control" placeholder="산 이름을 입력하세요." id="search_moutain">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary btn-lg" type="button" id="">검색</button>
+                            <button class="btn btn-outline-secondary btn-lg" type="button" onclick="search()">검색</button>
                         </div>
                     </div>
                 </div>
@@ -145,7 +154,7 @@
                     </div>
                     <div class="pics_area">
                         <div class="row">
-                            {% for post in posts %}
+                            {% for post in posts|reverse %}
                                 <div class="col-4">
                                     <a href="javascript:;" onclick="getPost('{{ post.pic }}')">
                                         <div class="img_box">
@@ -158,7 +167,8 @@
                                             {% endif %}
                                             <div class="hover_area">
                                                 <div class="txt_box">
-                                                    <p>{{ post.mountain }}</p>
+                                                    <p class="mountain">{{ post.mountain }}</p>
+                                                    <p class="user"><strong>{{ post.userID }}</strong>님의 후기</p>
                                                 </div>
                                                 <ul class="labels">
                                                     {% for arr, class in post.fa %}
@@ -192,6 +202,7 @@
                         <div class="card">
                             <img src="https://youimg1.tripcdn.com/target/10040d0000006tj6eB5B8_C_760_506.jpg"
                                  class="card-img-top" alt="...">
+                            <p class="user">사용자 id</p>
                             <div class="card-body">
                                 <h5 class="card-title">관악산 <span class="route">사당 능선 코스</span></h5>
                                 <div class="post_info">
