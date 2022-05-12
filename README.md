@@ -4,30 +4,40 @@
 
 ## 프로젝트 정보
 
-*> - 혼자 등산을 하면서 나를 기분좋게 해주었던 산의 사진과 좋았던 코스를 소개하며 혼산러들의 정보를 공유하는 웹페이지입니다.*
+ - 혼자 등산을 하면서 나를 기분좋게 해주었던 산의 사진과 좋았던 코스를 소개하며 혼산러들의 정보를 공유하는 웹페이지입니다.*
 
-*> - 개발기간 : 22.5.9-5.12*
+ - 개발기간 : 22.5.9-5.12*
 
 ## Stack
 
-*> - frontend : HTML, CSS,*
+ - frontend : HTML, CSS,*
 
-*> - backend : python ,Flask*
+ - backend : python ,Flask*
 
-*> - db : mongoDb*
+ - db : mongoDb*
 
-*> - jQuery, jinja2, javascript*
+ - jQuery, jinja2, javascript*
 
 ## 상세기능
+### 메인페이지 
+ - 사진 및 리뷰등록*
+ - modal 기능 - 사진 클릭 시 상세페이지*
 
-*> - 로그인 / 회원가입*
+### 로그인,회원가입
 
-*> - 로그아웃*
+ - 메인 페이지에서 로그인 페이지로 rendering 
+ - JWT Token 이용 
+ - 회원가입 button 클릭 시 회원가입 button으로 toggle 
+ - Bulma 사용
 
-*> - 사진 및 리뷰등록*
+### 상세페이지
 
-*> - modal 기능 - 사진 클릭 시 상세페이지*
+#### 수정
 
+ - 로그인
+ - 로그아웃
+ - 회원가입
+ 
 ## API 구성
 
 ### 웹페이지의 메인페이지
