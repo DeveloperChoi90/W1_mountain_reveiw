@@ -52,6 +52,7 @@
 			}
 
             if (pic === "" || mountain === ""){
+                // 산이름만 입력하는 경우를 생각해야한다.
                         if(pic === ""){
                             alert("사진을 등록해 주세요.")
                             return
@@ -97,7 +98,7 @@
             </h1>
             <ul class="btns">
                 <!-- 밑에는 사용자 아이디 불러올 수 있으면 추가.. -->
-                <li class="user"><p><strong>회원ID</strong>님, 환영합니다!</p></li>
+                <li class="user"><p><strong>{{ user_id }}</strong>님, 환영합니다!</p></li>
                 <li>
                     <button type="button" class="btn btn-light btn-sm">로그인</button>
                 </li>
