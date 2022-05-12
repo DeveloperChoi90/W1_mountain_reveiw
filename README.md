@@ -61,7 +61,7 @@
 
 ### 웹페이지의 메인페이지
 
-*> - 메인페이지인 index.html 파일과 등록된 게시글의 정보를 mongoDB에서 가저와 rendering 해준다.*
+*> - 메인페이지인 index.html 파일과 등록된 게시글의 정보를 mongoDB에서 가져와 rendering 해준다.*
 
 ```python
 @app.route('/')
