@@ -184,7 +184,7 @@ def register():
         # print(doc)
         return jsonify({"result": "success", 'msg': '포스팅 성공'})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
-        return redirect(url_for("main"))
+        return redirect(url_for("/"))
 
 
 if __name__ == '__main__':
