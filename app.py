@@ -22,20 +22,29 @@ client = MongoClient('mongodb+srv://test:sparta@cluster0.zosuv.mongodb.net/Clust
 db = client.dbsparta
 
 SECRET_KEY = 'SPARTA'
-SECRET_KEY = 'SPARTA'
 
 
 @app.route('/')
 def home():
     msg = request.args.get("msg")
+    # posts = list(db.mountain_info.find({}, {'_id': False}))
+    return render_template('index.html', msg=msg) #posts=posts)
+
+
+@app.route('/login/home')
+def home_():
+    msg = request.args.get("msg")
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    user_id = payload["id"]
     posts = list(db.mountain_info.find({}, {'_id': False}))
     status = request.args.get("searched")
     keyword = request.args.get("keyword")
 
     if status is not None:
-        return render_template('index.html', posts=posts, status=status, keyword=keyword)
+        return render_template('index.html', posts=posts, status=status, keyword=keyword, user_id=user_id)
     else:
-        return render_template('index.html', posts=posts, status='no', keyword='')
+        return render_template('index.html', posts=posts, status='no', keyword='', user_id=user_id)
 
 
 @app.route('/login')
@@ -55,6 +64,20 @@ def login():
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+
+
+# @app.route('/login')
+# def home_login():
+#     msg = request.args.get("msg")
+#     token_receive = request.cookies.get('mytoken')
+#     print(payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256']))
+#     try:
+#         # user_info = db.users.find_one({"username": payload["id"]})
+#         return render_template('register.html', msg=msg)
+#     except jwt.ExpiredSignatureError:
+#         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+#     except jwt.exceptions.DecodeError:
+#         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 
 @app.route('/sign_in', methods=['POST'])
@@ -114,6 +137,7 @@ def register():
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_id = payload['id']
+        print(user_id)
         mountain_receive = request.form["mountain_give"]
         route_receive = request.form["route_give"]
         location_receive = request.form["location_give"]
