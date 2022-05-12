@@ -23,6 +23,9 @@ body {
     padding: 0;
     margin: 0;
 }
+
+.log-out
+
 .btn_area{
     padding: 20px 0;
 }
@@ -140,4 +143,20 @@ section{
     font-size: 18px;
     color: #6c757d;
     padding: 20px 15px 5px;
+}
+/*//로그인*/
+.button.is-sparta {
+    background-color: #009740;
+    border-color: transparent;
+    color: #fff !important;
+}
+
+.button.is-sparta.is-outlined {
+    background-color: transparent;
+    border-color: #009740;
+    color: #009740 !important;
+}
+
+.help {
+    color: gray;
 }

@@ -6,9 +6,13 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 import certifi
-ca = certifi.where()
 import os
-import requests
+ca = certifi.where()
+
+client = MongoClient('mongodb+srv://last:last@cluster0.iqlow.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
+db = client.dbsparta
+##//위에는 내가 사용하는 파일
+
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -17,7 +21,6 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 #mongoDB
 ##각자 DB 사용
-#유승연 작성
 
 
 SECRET_KEY = 'SPARTA'
