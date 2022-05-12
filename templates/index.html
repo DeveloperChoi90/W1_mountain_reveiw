@@ -31,13 +31,8 @@
 
     <title>나혼자 산탄다</title>
     <script>
+        let posts = {{ posts|safe }};
 
-        function sign_out() {
-          $.removeCookie('mytoken', {path: '/login/login'});
-          alert('로그아웃!')
-          window.location.href = "/"
-        }
-           
         function getPost(img) {
             let num = '';
             // 클릭한 리스트의 pic 값과 같은 data의 인덱스 찾기
@@ -88,6 +83,13 @@
             }
             modal.classList.add('is-active');
         }
+
+        function sign_out() {
+            $.removeCookie('mytoken', {path: '/'});
+            alert('로그아웃!')
+            window.location.href = "/login"
+        }
+
 
         let mountain_list = [];
         for (let i = 0; i < posts.length; i++) {

@@ -18,27 +18,33 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 #mongoDB
 ##각자 DB 사용
+client = MongoClient('mongodb+srv://test:sparta@cluster0.zosuv.mongodb.net/Cluster0?retryWrites=true&w=majority')
+db = client.dbsparta
 
 SECRET_KEY = 'SPARTA'
+SECRET_KEY = 'SPARTA'
+
 
 @app.route('/')
 def home():
     msg = request.args.get("msg")
-    return render_template('index.html', msg=msg)
+    posts = list(db.mountain_info.find({}, {'_id': False}))
+    return render_template('index.html', msg=msg, posts=posts)
+
 
 @app.route('/login')
 def home_login():
     msg = request.args.get("msg")
     return render_template('register.html', msg=msg)
 
+
 @app.route('/login/login')
 def login():
     token_receive = request.cookies.get('mytoken')
-    posts = list(db.mountain_info.find({}, {'_id': False}))
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         # user_info = db.users.find_one({"username": payload["id"]})
-        return render_template('register.html', posts=posts)
+        return render_template('register.html')
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
