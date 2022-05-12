@@ -7,12 +7,7 @@ from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 import certifi
 import os
-ca = certifi.where()
-
-client = MongoClient('mongodb+srv://last:last@cluster0.iqlow.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
-db = client.dbsparta
-##//위에는 내가 사용하는 파일
-
+import requests
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -21,7 +16,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 #mongoDB
 ##각자 DB 사용
-
+client = MongoClient('mongodb+srv://test:sparta@cluster0.zosuv.mongodb.net/Cluster0?retryWrites=true&w=majority')
+db = client.dbsparta
 
 SECRET_KEY = 'SPARTA'
 
@@ -30,9 +26,8 @@ SECRET_KEY = 'SPARTA'
 def home():
     token_receive = request.cookies.get('mytoken')
     posts = list(db.mountain_info.find({}, {'_id': False}))
-    print(os.path.abspath(os.path.dirname(__file__)))
     try:
-        # payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         # user_info = db.users.find_one({"username": payload["id"]})
         return render_template('index.html', posts=posts)
     except jwt.ExpiredSignatureError:

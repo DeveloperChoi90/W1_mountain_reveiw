@@ -19,20 +19,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700&family=Noto+Sans+KR:wght@100;400;500;700&display=swap"
           rel="stylesheet">
-    <link rel="stylesheet" href="/static/style.css">
-    <!--<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
-    <!--cokies-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 
     <title>나혼자 산탄다</title>
-
     <script>
         function getPost(img) {
             let posts = {{ posts|safe }};
@@ -84,7 +81,7 @@
             }
             modal.classList.add('is-active');
         }
-
+        
         function sign_out() {
             $.removeCookie('mytoken', {path: '/'});
             alert('로그아웃!')
@@ -100,6 +97,7 @@
                 <h1 class="display-4">나혼자 산탄다!</h1>
                 <p class="lead">혼자 산 타려니 막막한 혼산러, 등린이들 모여라! 등산 경험을 공유하고 유익한 정보도 얻어보세요!</p>
             </div>
+        </div>
     </div>
     <div class="contents">
         <div class="container">
