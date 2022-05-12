@@ -5,8 +5,9 @@ import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
+import certifi
 import os
-
+import requests
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -27,7 +28,6 @@ def home():
     posts = list(db.mountain_info.find({}, {'_id': False}))
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        print(payload)
         # user_info = db.users.find_one({"username": payload["id"]})
         return render_template('index.html', posts=posts)
     except jwt.ExpiredSignatureError:
