@@ -24,6 +24,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
@@ -62,7 +63,7 @@
                                 </div>
                             </div>`;
             modal.querySelector('.post_area').innerHTML = html_temp; // 모달 안에 append
-            if (post.pic !== '') {
+            if(post.pic !== ''){
                 let img = document.createElement('img');
                 img.className = 'card-img-top';
                 img.setAttribute('alt', post.mountain);
@@ -80,10 +81,16 @@
             }
             modal.classList.add('is-active');
         }
+        
+        function sign_out() {
+            $.removeCookie('mytoken', {path: '/'});
+            alert('로그아웃!')
+            window.location.href = "/login"
+}
     </script>
 </head>
 <body>
-<div class="wrap">
+  <div class="wrap">
     <header id="header">
         <h1 class="logo">
             <a href="/">나혼자<strong>산</strong>탄다</a>
