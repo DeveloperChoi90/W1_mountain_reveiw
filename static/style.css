@@ -283,7 +283,8 @@ a.btn:not([href]):not([tabindex]){
 }
 
 /* container */
-#container{
+#container {
     position: relative;
     z-index: 1;
+}
   
