@@ -90,19 +90,37 @@
     </script>
 </head>
 <body>
-<div class="wrap">
-    <div class="banner_area">
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-4">나혼자 산탄다!</h1>
-                <p class="lead">혼자 산 타려니 막막한 혼산러, 등린이들 모여라! 등산 경험을 공유하고 유익한 정보도 얻어보세요!</p>
+  <div class="wrap">
+    <header id="header">
+        <h1 class="logo">
+            <a href="/">나혼자<strong>산</strong>탄다</a>
+        </h1>
+        <ul class="btns">
+            <!-- 밑에는 사용자 아이디 불러올 수 있으면 추가.. -->
+            <li class="user"><p><strong>회원ID</strong>님, 환영합니다!</p></li>
+            <li>
+                <button type="button" class="btn btn-light btn-sm">로그인</button>
+            </li>
+            <li>
+                <button type="button" class="btn btn-outline-light btn-sm">로그아웃</button>
+            </li>
+            <li>
+                <button type="button" class="btn btn-outline-light btn-sm">회원가입</button>
+            </li>
+        </ul>
+    </header>
+    <div id="container">
+        <div class="banner_area">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4">나혼자 산탄다!</h1>
+                    <p class="lead">혼자 산 타려니 막막한 혼산러, 등린이들 모여라! 등산 경험을 공유하고 유익한 정보도 얻어보세요!</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="contents">
-        <div class="container">
-            <section>
-                <div class="search_area">
+        <div class="contents">
+            <section class="search_area">
+                <div class="container">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="산 이름을 입력하세요.">
                         <div class="input-group-append">
@@ -110,45 +128,52 @@
                         </div>
                     </div>
                 </div>
-<!--                <div class="btn_area taR">-->
-<!--                    <button type="button" class="btn btn-secondary btn-lg"-->
-<!--                            onclick="$('#modal-post-write').addClass('is-active')">등록하기-->
-<!--                    </button>-->
-<!--                </div>-->
-                <div class="btn_area taR">
-                    <button type="button" class="btn btn-secondary btn-lg" onclick='window.location.href = "/register"'>등록하기</button>  {# html파일을 연결하기 위해서 먼저 app.py에서 랜더링을 해야 하는건가? #}
-                </div>
-                <div class="pics_area">
-                    <div class="row">
-                        {% for post in posts %}
-                            <div class="col-4">
-                                <a href="javascript:;" onclick="getPost('{{ post.pic }}')">
-                                    <div class="img_box">
-                                        {% if post.pic == '' %}
-                                            <img src="{{ url_for('static', filename='@thumb_default.png') }}"
-                                                 class="img-fluid" alt="{{ post.mountain }}">
-                                        {% else %}
-                                            <img src="{{ url_for('static', filename='img/') }}{{ post.pic }}"
-                                                 class="img-fluid" alt="{{ post.mountain }}">
-                                        {% endif %}
-                                        <div class="hover_area">
-                                            <div class="txt_box">
-                                                <p>{{ post.mountain }}</p>
-                                            </div>
-                                            <ul class="labels">
-                                                {% for arr, class in post.fa %}
-                                                    {% for text, show in arr.items() %}
-                                                        {% if show %}
-                                                            <li class="badge badge-pill {{ class }}">{{ text }}</li>
-                                                        {% endif %}
+            </section>
+            <section class="posts_area">
+                <div class="container">
+                    <!--                <div class="btn_area taR">-->
+                    <!--                    <button type="button" class="btn btn-secondary btn-lg"-->
+                    <!--                            onclick="$('#modal-post-write').addClass('is-active')">등록하기-->
+                    <!--                    </button>-->
+                    <!--                </div>-->
+                    <div class="btn_area taR">
+                        <button type="button" class="btn btn-secondary btn-lg col-2"
+                                onclick='window.location.href = "/register"'>등록하기
+                        </button>
+                        {# html파일을 연결하기 위해서 먼저 app.py에서 랜더링을 해야 하는건가? #}
+                    </div>
+                    <div class="pics_area">
+                        <div class="row">
+                            {% for post in posts %}
+                                <div class="col-4">
+                                    <a href="javascript:;" onclick="getPost('{{ post.pic }}')">
+                                        <div class="img_box">
+                                            {% if post.pic == '' %}
+                                                <img src="{{ url_for('static', filename='@thumb_default.png') }}"
+                                                     class="img-fluid" alt="{{ post.mountain }}">
+                                            {% else %}
+                                                <img src="{{ url_for('static', filename='img/') }}{{ post.pic }}"
+                                                     class="img-fluid" alt="{{ post.mountain }}">
+                                            {% endif %}
+                                            <div class="hover_area">
+                                                <div class="txt_box">
+                                                    <p>{{ post.mountain }}</p>
+                                                </div>
+                                                <ul class="labels">
+                                                    {% for arr, class in post.fa %}
+                                                        {% for text, show in arr.items() %}
+                                                            {% if show %}
+                                                                <li class="badge badge-pill {{ class }}">{{ text }}</li>
+                                                            {% endif %}
+                                                        {% endfor %}
                                                     {% endfor %}
-                                                {% endfor %}
-                                            </ul>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
-                        {% endfor %}
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </section>
@@ -205,7 +230,7 @@
         <div class="modal-background" onclick='$("#modal-post-write").removeClass("is-active")'></div>
         <div class="modal-content">
             <button class="modal-close is-large" aria-label="close"
-                onclick='$("#modal-post-write").removeClass("is-active")'></button>
+                    onclick='$("#modal-post-write").removeClass("is-active")'></button>
             <div class="box">
                 <div class="form_area">
                     <form>
