@@ -38,7 +38,13 @@ def home_():
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     user_id = payload["id"]
     posts = list(db.mountain_info.find({}, {'_id': False}))
-    return render_template('index.html', msg=msg, posts=posts, user_id=user_id)
+    status = request.args.get("searched")
+    keyword = request.args.get("keyword")
+
+    if status is not None:
+        return render_template('index.html', posts=posts, status=status, keyword=keyword, user_id=user_id)
+    else:
+        return render_template('index.html', posts=posts, status='no', keyword='', user_id=user_id)
 
 
 @app.route('/login')

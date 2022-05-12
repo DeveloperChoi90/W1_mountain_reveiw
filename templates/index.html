@@ -32,6 +32,9 @@
     <title>나혼자 산탄다</title>
     <script>
         let posts = {{ posts|safe }};
+        let searchStatus = "{{ status }}";
+        let searchKeyword = "{{ keyword }}";
+        let searched = false
 
         function getPost(img) {
             let num = '';
@@ -90,15 +93,16 @@
             window.location.href = "/login"
         }
 
-
-        let mountain_list = [];
-        for (let i = 0; i < posts.length; i++) {
-            mountain_list.push(posts[i]['mountain'])
+        let searchVal = '';
+        function search() {
+            searchVal = document.getElementById('mountainName').value;
+            if (searchVal.trim().length <= 0) {
+                alert('검색어를 입력하세요.');
+                return;
+            }
+            searched = true;
+            window.location.href = `/?searched=yes&keyword=${searchVal}`;
         }
-        function search(){
-
-        }
-
     </script>
 </head>
 <body>
@@ -116,9 +120,9 @@
             <li>
                 <button type="button" class="btn btn-outline-light btn-sm" onclick="sign_out()">로그아웃</button>
             </li>
-{#            <li>#}
-{#                <button type="button" class="btn btn-outline-light btn-sm">회원가입</button>#}
-{#            </li>#}
+            <!--<li>
+                <button type="button" class="btn btn-outline-light btn-sm">회원가입</button>
+            </li>-->
         </ul>
     </header>
     <div id="container">
@@ -134,7 +138,7 @@
             <section class="search_area">
                 <div class="container">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="산 이름을 입력하세요." id="search_moutain">
+                        <input type="text" class="form-control" placeholder="산 이름을 입력하세요." id="mountainName">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary btn-lg" type="button" onclick="search()">검색</button>
                         </div>
@@ -157,6 +161,7 @@
                     <div class="pics_area">
                         <div class="row">
                             {% for post in posts|reverse %}
+                                {% if (status == 'no') or (status == 'yes' and keyword == post.mountain ) %}
                                 <div class="col-4">
                                     <a href="javascript:;" onclick="getPost('{{ post.pic }}')">
                                         <div class="img_box">
@@ -185,6 +190,7 @@
                                         </div>
                                     </a>
                                 </div>
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </div>
