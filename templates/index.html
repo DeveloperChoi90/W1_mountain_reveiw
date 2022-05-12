@@ -25,9 +25,9 @@
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-                crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
     <title>나혼자 산탄다</title>
     <script>
@@ -152,13 +152,14 @@
                     <!--                            onclick="$('#modal-post-write').addClass('is-active')">등록하기-->
                     <!--                    </button>-->
                     <!--                </div>-->
-                    <div>
-                        <div class="btn_area taR">
-                            <button type="button" class="btn btn-secondary btn-lg col-2"
-                                    onclick='window.location.href = "/register"'>등록하기
-                            </button>
-                            {# html파일을 연결하기 위해서 먼저 app.py에서 랜더링을 해야 하는건가? #}
-                        </div>
+                    <div class="btn_area taR {% if status == 'yes' %}btn_x2{% endif %}">
+                        {% if status == 'yes' %}
+                        <button type="button" class="btn btn-outline-secondary btn-lg" onclick="window.location.href = '/login/home'">전체 목록 보기</button>
+                        {% endif %}
+                        <button type="button" class="btn btn-secondary btn-lg col-2"
+                                onclick='window.location.href = "/register"'>등록하기
+                        </button>
+                        {# html파일을 연결하기 위해서 먼저 app.py에서 랜더링을 해야 하는건가? #}
                     </div>
                     <div class="pics_area">
                         <div class="row">
