@@ -26,56 +26,68 @@
             crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
 
-    <title>나혼자 산탄다</title>
-    <script>
-        $(document).ready(function () {
-            let file = document.querySelector('#customFile');
-            let input_filename = document.querySelector('#customFile2');
-            console.log(input_filename)
-            file.addEventListener('change', function (e) {
-                input_filename.innerHTML = e.target.files[0].name;
-             })
-        })
+	<title>나혼자 산탄다</title>
+	<script>
+		$(document).ready(function () {
+			let file = document.querySelector('#customFile');
+			let input_filename = document.querySelector('#customFile2');
+			console.log(input_filename)
+			file.addEventListener('change', function (e) {
+				input_filename.innerHTML = e.target.files[0].name;
+			 })
+		})
 
 
-        function get_user_info() {
-            let pic = $(`#customFile`)[0].files[0]
-            console.log(pic)
-            let mountain = $(`#mountain`).val()
-            let route = $(`#hikingRoute`).val()
-            let loca = $(`#location`).val()
-            let facilities = [0, 0, 0, 0, 0]
-            let description = $(`#etc`).val()
-            for(let i = 0; i < facilities.length; i++) {
-                if($(`#fa0${i+1}`).is(':checked')){
-                    facilities[i] = 1
-                }
-            }
-            let form_data = new FormData()
-            form_data.append("file_give", pic)
-            form_data.append("mountain_give", mountain)
-            form_data.append("route_give", route)
-            form_data.append("location_give", loca)
-            form_data.append("facilities_give", facilities)   // facilities 의 경우 리스트 FormData() 형식의 경우 value 가 다 문자열로 저장된다.
-            form_data.append("description_give", description)
+		function get_user_info() {
+			let pic = $(`#customFile`)[0].files[0]
+			let mountain = $(`#mountain`).val()
+			let route = $(`#hikingRoute`).val()
+			let loca = $(`#location`).val()
+			let facilities = [0, 0, 0, 0, 0]
+			let description = $(`#etc`).val()
+			for(let i = 0; i < facilities.length; i++) {
+				if($(`#fa0${i+1}`).is(':checked')){
+					facilities[i] = 1
+				}
+			}
 
-            $.ajax({
-                type: "POST",
-                url: "/register/save",
-                data: form_data,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                    if (response["result"] == "success") {
-                        alert(response["msg"])
-                        window.location.href = "/"
+            if (pic === "" || mountain === ""){
+                        if(pic === ""){
+                            alert("사진을 등록해 주세요.")
+                            return
+                        }
+                        if(mountain === "") {
+                            alert("산이름을 등록해 주세요.")
+                            return
+                        }
+                        {#window.location.reload()#}
                     }
-                }
-            });
+            else {
+                let form_data = new FormData()
+                form_data.append("file_give", pic)
+                form_data.append("mountain_give", mountain)
+                form_data.append("route_give", route)
+                form_data.append("location_give", loca)
+                form_data.append("facilities_give", facilities)   // facilities 의 경우 리스트 FormData() 형식의 경우 value 가 다 문자열로 저장된다.
+                form_data.append("description_give", description)
 
-        }
-    </script>
+                $.ajax({
+                    type: "POST",
+                    url: "/register/save",
+                    data: form_data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        if (response["result"] === "success") {
+                            alert(response["msg"])
+                            window.location.href = "/"
+                        }
+                    }
+                });
+            }
+		}
+	</script>
 </head>
 <body>
 <div class="wrap">
@@ -127,10 +139,10 @@
                             <input type="text" class="form-control" id="hikingRoute">
                         </div>
 
-                        <div class="form-group">
-                            <label for="location" class="form_ttl">지역명</label>
-                            <input type="text" class="form-control" id="location">
-                        </div>
+						<div class="form-group">
+							<label for="location" class="form_ttl">지역명</label>
+							<input type="text" class="form-control" id="location">
+						</div>
 <!--{#화장실 badge-primary 대피소 badge-secondary 대중교통 badge-success 주차장 badge-danger 하산 후 먹거리 badge-warning#}-->
 
                         <div class="form-group">
