@@ -66,15 +66,26 @@ def home():
     return render_template('index.html', msg=msg) 
 ```   
 
-*> - 로그인 후 보여지는 페이지로 로그인한 상태와 안한 상태를 구분, DB에 저장되어있는 등록페이지의 DB, 검색기능을 사용했을 때 검색어와 상태를 rendering 해준다.*
+*> - 로그인 후 보여지는 페이지로 로그인한 상태와 안한 상태를 구분하여 로그인한 상태일 경우 사용자 ID를 Client로 전달한다.
+*> - DB에 저장되어있는 게시글의 데이터 리스트를 불러와 전달한다.
+*> - 검색창에 단어를 검색할 경우, 검색어와 검색 상태를 함수 파라미터로 받아와 전달한다.
+     검색기능을 실행하지 않았을 경우 임의로 status에는 'no', keyword에는 ''빈 값을 전달한다.
 
 ```python
 @app.route('/login/home')
 def home_():
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    user_id = payload["id"]
+    posts = list(db.mountain_info.find({}, {'_id': False}))
+    status = request.args.get("searched")
+    keyword = request.args.get("keyword")
+    
     if status is not None:
         return render_template('index.html', posts=posts, status=status, keyword=keyword, user_id=user_id)
     else:
         return render_template('index.html', posts=posts, status='no', keyword='', user_id=user_id)
+
 ```
 
 
