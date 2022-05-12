@@ -9,9 +9,7 @@ import os
 import certifi
 ca = certifi.where()
 
-client   = MongoClient('mongodb+srv://last:last@cluster0.iqlow.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
-db = client.dbsparta
-##//위에는 내가 사용하는 파일
+
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
