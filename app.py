@@ -128,7 +128,10 @@ def check_dup():
   
 @app.route('/register')
 def register_page():
-    return render_template("write.html")
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    user_id = payload["id"]
+    return render_template("write.html", user_id=user_id)
 
 
 @app.route('/register/save', methods=['POST'])
